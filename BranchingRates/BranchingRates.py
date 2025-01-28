@@ -10,6 +10,8 @@ def g_2(x,y):
   xf=x/2-math.floor(x/2)
   yf=y/2-math.floor(y/2)
   m=yf/xf
+  if xf==0:
+    return 1
   if m<(1/3):
     return .2
   if m>(3):
