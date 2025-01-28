@@ -107,4 +107,4 @@ def g_BBM(BBM_0, T, eps, g):
     else:
       B.append(b_part)
 
-    return B
+  return B
