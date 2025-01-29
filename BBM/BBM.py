@@ -110,7 +110,9 @@ def g_BBM(BBM_0, T, eps, g):
 
   return B
 
-def PlotBBM(BBM_0):
+#ws window size
+
+def PlotBBM(BBM_0, name, ws):
   N = len(BBM_0)
   x = np.empty(N)
   y = np.empty(N)
@@ -121,9 +123,11 @@ def PlotBBM(BBM_0):
   fig, ax = plt.subplots(figsize=(6, 6))
   ax.scatter(x, y, s=1)
   ax.axis('equal')
-  plt.xlim(-20, 20)
-  plt.ylim(-20, 20)
-  plt.show()
+  plt.xlim(-ws, ws)
+  plt.ylim(-ws, ws)
+  fig.savefig('{0}.png'.format(name))   # save the figure to file
+  plt.close(fig)
+  #plt.show()
 
 # Pg_BBM recieves five parameters:
 # list of particles with borning time and position (BBM_0), 
