@@ -1,9 +1,12 @@
 from BBM import InitializeBBM
 from BBM import g_BBM
-from BranchingRates import g_1
+from BBM import PlotBBM
+from BranchingRates import g_2
 
-T = 3
-B = InitializeBBM([], T, g_1)
+T = 15
+B = InitializeBBM([], T, g_2)
 eps = 10**(-15)
-A = g_BBM(B, T, eps, g_1)
-print(A)
+A = g_BBM(B, T, eps, g_2)
+
+PlotBBM(A)
+

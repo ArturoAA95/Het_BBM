@@ -1,5 +1,6 @@
 import numpy as np
 from numpy import random
+import matplotlib.pyplot as plt
 
 # InitializeBBM receives:
 # empty list (BBM_0), 
@@ -89,7 +90,7 @@ def AppendSpine(BBM_0, T, b_part, g):
     y1 = y0 + random.normal(0, np.sqrt(T-t))
     BBM_0.append([T, x1, y1])
 
-# BBM recieves four parameters:
+# g_BBM recieves four parameters:
 # list of particles with borning time and position (BBM_0), 
 # the final time (T),
 # a small tolerance (eps),
@@ -108,3 +109,38 @@ def g_BBM(BBM_0, T, eps, g):
       B.append(b_part)
 
   return B
+
+def PlotBBM(BBM_0):
+  N = len(BBM_0)
+  x = np.empty(N)
+  y = np.empty(N)
+  for i in range (N):
+    x[i] = BBM_0[i][1]
+    y[i] = BBM_0[i][2]
+
+  fig, ax = plt.subplots(figsize=(6, 6))
+  ax.scatter(x, y, s=1)
+  ax.axis('equal')
+  plt.xlim(-20, 20)
+  plt.ylim(-20, 20)
+  plt.show()
+
+# Pg_BBM recieves five parameters:
+# list of particles with borning time and position (BBM_0), 
+# the final time (T),
+# number pictures (N)
+# a small tolerance (eps),
+# the branching rate (g). 
+# Returns: a realization of the g-BBM
+
+def Pg_BBM(BBM_0, T, N, eps, g):
+  pics = []
+  t = np.empty(N)
+  A = InitializeBBM([], T/N, g)
+  for i in range(N):
+    t[i] = (i+1)*T/N
+    B = g_BBM(A.copy(), t[i], eps, g)
+    A = B.copy()
+    #PlotBBM(A)
+    pics.append(A)
+  return pics
