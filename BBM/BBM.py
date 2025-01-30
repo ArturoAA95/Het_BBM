@@ -1,6 +1,7 @@
 import numpy as np
 from numpy import random
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # type: ignore
+from scipy.spatial import ConvexHull # type: ignore
 
 # InitializeBBM receives:
 # empty list (BBM_0), 
@@ -122,6 +123,33 @@ def PlotBBM(BBM_0, name, ws):
 
   fig, ax = plt.subplots(figsize=(6, 6))
   ax.scatter(x, y, s=1)
+  ax.axis('equal')
+  plt.xlim(-ws, ws)
+  plt.ylim(-ws, ws)
+  fig.savefig('{0}.png'.format(name))   # save the figure to file
+  plt.close(fig)
+  #plt.show()
+
+#ws window size
+
+def PlotBBM_CH(BBM_0, name, ws):
+  N = len(BBM_0)
+  x = np.empty(N)
+  y = np.empty(N)
+  for i in range (N):
+    x[i] = BBM_0[i][1]
+    y[i] = BBM_0[i][2]
+
+  points = np.column_stack((x, y))
+  hull = ConvexHull(points)
+  fig, ax = plt.subplots(figsize=(6, 6))
+  ax.scatter(x, y, s=1)
+  
+  for simplex in hull.simplices:
+    ax.plot(points[simplex, 0], points[simplex, 1], 'r')
+  
+  ax.plot(points[hull.vertices, 0], points[hull.vertices, 1], 'o', mec='r', color='r')
+  
   ax.axis('equal')
   plt.xlim(-ws, ws)
   plt.ylim(-ws, ws)
