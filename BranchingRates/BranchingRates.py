@@ -7,8 +7,10 @@ def g_1(x,y):
   return (1/4)*np.sin(x*2*(np.pi))*np.sin(y*2*(np.pi))+(3/4)
 
 def g_2(x,y):
-  xf=x/2-math.floor(x/2)
-  yf=y/2-math.floor(y/2)
+  xf=x-math.floor(x)
+  yf=y-math.floor(y)
+  if(xf==0):
+    return 1
   m=yf/xf
   if xf==0:
     return 1
