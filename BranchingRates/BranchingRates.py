@@ -18,3 +18,6 @@ def g_2(x,y):
     return .2
   else:
     return 1
+  
+def g_3(x,y):
+  return 3*np.sin(x*2*(np.pi))*np.sin(y*2*(np.pi))+3
