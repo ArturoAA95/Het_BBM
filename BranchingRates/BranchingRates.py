@@ -3,6 +3,9 @@ import math
 
 #Rate functions for the braching Brownian motion
 
+def g_0(x,y):
+  return 1
+
 def g_1(x,y):
   return (1/4)*np.sin(x*2*(np.pi))*np.sin(y*2*(np.pi))+(3/4)
 
